@@ -123,6 +123,9 @@ func (g *GhostPad) GetTarget() *Pad {
 // SetTarget sets the new target of the ghostpad gpad. Any existing target is unlinked and links to the new target are
 // established. if newtarget is nil the target will be cleared.
 func (g *GhostPad) SetTarget(target *Pad) bool {
+	if target == nil {
+		return gobool(C.gst_ghost_pad_set_target(g.Instance(), nil))
+	}
 	return gobool(C.gst_ghost_pad_set_target(
 		g.Instance(), target.Instance(),
 	))
