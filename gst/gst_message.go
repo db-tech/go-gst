@@ -62,6 +62,8 @@ func (m *Message) Copy() *Message {
 // Source returns the source of the message.
 func (m *Message) Source() string { return C.GoString(m.Instance().src.name) }
 
+func (m *Message) Src() *Object { return wrapObject(toGObject(unsafe.Pointer(m.Instance().src))) }
+
 // Type returns the MessageType of the message.
 func (m *Message) Type() MessageType {
 	return MessageType(m.Instance()._type)
